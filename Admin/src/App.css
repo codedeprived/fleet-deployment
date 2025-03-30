@@ -1,0 +1,17 @@
+.dropdown-menu {
+  position: absolute;
+  top: 100%; /* Position below the button */
+  right: 0;
+  z-index: 50;
+  width: 12rem; /* Adjust width as needed */
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+body {
+  background-color: #ffffff; /* Default light mode background */
+}
+
+body.dark {
+  background-color: #121212; /* Dark mode background */
+}
