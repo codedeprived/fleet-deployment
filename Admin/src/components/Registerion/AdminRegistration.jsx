@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AdminRegistration = () => {
   const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
-    reenter_password: '',
+    username: "",
+    email: "",
+    password: "",
+    reenter_password: "",
   });
 
   const navigate = useNavigate();
@@ -21,39 +21,50 @@ const AdminRegistration = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.password !== formData.reenter_password) {
-      toast.error('Passwords do not match!', { position: 'top-center' });
+      toast.error("Passwords do not match!", { position: "top-center" });
       return;
     }
 
     try {
-      const response = await fetch('http://localhost:5001/api/admin', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username: formData.username,
-          email: formData.email,
-          password_hash: formData.password, // Ensure this is hashed in the backend
-        }),
-      });
+      const response = await fetch(
+        "flvm6-cma9bdgbh7fngrfb.centralindia-01.azurewebsites.net/api/admin",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: formData.username,
+            email: formData.email,
+            password_hash: formData.password, // Ensure this is hashed in the backend
+          }),
+        }
+      );
       if (response.ok) {
-        toast.success('Admin registered successfully! Redirecting to login...', {
-          position: 'top-center',
-          autoClose: 2000,
-        });
+        toast.success(
+          "Admin registered successfully! Redirecting to login...",
+          {
+            position: "top-center",
+            autoClose: 2000,
+          }
+        );
         setTimeout(() => {
-          navigate('/admin/login');
+          navigate("/admin/login");
         }, 1500);
       } else {
         const errorData = await response.json();
-        toast.error(errorData.message || 'Registration failed. Please try again.', {
-          position: 'top-center',
-        });
+        toast.error(
+          errorData.message || "Registration failed. Please try again.",
+          {
+            position: "top-center",
+          }
+        );
       }
     } catch (error) {
-      console.error('Error submitting form:', error);
-      toast.error('An error occurred. Please try again.', { position: 'top-center' });
+      console.error("Error submitting form:", error);
+      toast.error("An error occurred. Please try again.", {
+        position: "top-center",
+      });
     }
   };
 
@@ -61,7 +72,7 @@ const AdminRegistration = () => {
     <div
       className="relative flex items-center justify-center h-screen bg-cover bg-center"
       style={{ backgroundImage: `url('/public/aiBackgroundImage.jpg')` }}
-      >
+    >
       <div className="absolute inset-0 bg-black bg-opacity-30"></div>
       <ToastContainer />
 
@@ -69,7 +80,9 @@ const AdminRegistration = () => {
         <header className="text-4xl font-bold mb-6">Admin Register</header>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-300">Username</label>
+            <label className="block text-sm font-medium text-gray-300">
+              Username
+            </label>
             <input
               type="text"
               name="username"
@@ -81,7 +94,9 @@ const AdminRegistration = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-300">Email</label>
+            <label className="block text-sm font-medium text-gray-300">
+              Email
+            </label>
             <input
               type="email"
               name="email"
@@ -93,7 +108,9 @@ const AdminRegistration = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-300">Password</label>
+            <label className="block text-sm font-medium text-gray-300">
+              Password
+            </label>
             <input
               type="password"
               name="password"
@@ -105,7 +122,9 @@ const AdminRegistration = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-300">Re-enter Password</label>
+            <label className="block text-sm font-medium text-gray-300">
+              Re-enter Password
+            </label>
             <input
               type="password"
               name="reenter_password"
@@ -124,7 +143,7 @@ const AdminRegistration = () => {
           </button>
           <button
             type="button"
-            onClick={() => navigate('/admin/login')}
+            onClick={() => navigate("/admin/login")}
             className="text-blue-300 hover:underline mt-4 block"
           >
             Already have an account? Login
